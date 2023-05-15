@@ -18,8 +18,8 @@ services:
     container_name: sonarr
     volumes:
       - ${SONARR_LOC_1080P}:/config
-      - ${SONARR_LIB_1}:/data
-      - ${SONARR_LIB_2}:/data-dsnine
+      - ${MEDIA_LIB_1}:/data
+      - ${MEDIA_LIB_2}:/data-dsnine
     ports:
       - ${SONARR_1080P}:8989
   sonarr-4k:
@@ -28,7 +28,7 @@ services:
     container_name: sonarr-4k
     volumes:
       - ${SONARR_LOC_4K}:/config
-      - ${SONARR_LIB_2}:/data-dsnine
+      - ${MEDIA_LIB_2}:/data-dsnine
     ports:
       - ${SONARR_4K}:8989
   sonarr-anime:
@@ -37,7 +37,7 @@ services:
     container_name: sonarr-anime
     volumes:
       - ${SONARR_LOC_ANIME}:/config
-      - ${SONARR_LIB_1}:/data
-      - ${SONARR_LIB_2}:/data-dsnine
+      - ${MEDIA_LIB_1}:/data
+      - ${MEDIA_LIB_2}:/data-dsnine
     ports:
       - ${SONARR_ANIME}:8989

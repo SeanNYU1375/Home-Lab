@@ -1,0 +1,34 @@
+---
+version: "2.1"
+
+x-env: &env
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+  restart: unless-stopped
+
+x-env: &image
+  image: lscr.io/linuxserver/radarr:develop
+
+services:
+  radarr:
+    <<: *env
+    <<: *image
+    container_name: radarr
+    volumes:
+      - ${RADARR_LOC_1080P}:/config
+      - ${MEDIA_LIB_1}:/data
+      - ${MEDIA_LIB_2}:/data-dsnine
+    ports:
+      - ${RADARR_1080P}:7878
+  radarr-4k:
+    <<: *env
+    <<: *image
+    container_name: radarr-4k
+    volumes:
+      - ${RADARR_LOC_4K}:/config
+      - ${MEDIA_LIB_1}:/data
+      - ${MEDIA_LIB_2}:/data-dsnine
+    ports:
+      - ${RADARR_4K}:7878
