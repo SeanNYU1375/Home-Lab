@@ -8,11 +8,14 @@ x-env: &env
     - TZ=${TZ}
   restart: unless-stopped
 
+x-env: &image
+  image: lscr.io/linuxserver/sonarr:develop
+
 services:
   sonarr:
-    image: lscr.io/linuxserver/sonarr:develop
-    container_name: sonarr
+    <<: *image
     <<: *env
+    container_name: sonarr
     volumes:
       - ${SONARR_LOC_1080P}:/config
       - ${SONARR_LIB_1}:/data
@@ -20,18 +23,18 @@ services:
     ports:
       - ${SONARR_1080P}:8989
   sonarr-4k:
-    image: lscr.io/linuxserver/sonarr:develop
-    container_name: sonarr-4k
+    <<: *image
     <<: *env
+    container_name: sonarr-4k
     volumes:
       - ${SONARR_LOC_4K}:/config
       - ${SONARR_LIB_2}:/data-dsnine
     ports:
       - ${SONARR_4K}:8989
   sonarr-anime:
-    image: lscr.io/linuxserver/sonarr:develop
-    container_name: sonarr-anime
+    <<: *image
     <<: *env
+    container_name: sonarr-anime
     volumes:
       - ${SONARR_LOC_ANIME}:/config
       - ${SONARR_LIB_1}:/data
