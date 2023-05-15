@@ -1,0 +1,40 @@
+---
+version: "2.1"
+
+x-env: &env
+  environment:
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
+  restart: unless-stopped
+
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:develop
+    container_name: sonarr
+    <<: *env
+    volumes:
+      - ${SONARR_LOC_1080P}:/config
+      - ${SONARR_LIB_1}:/data
+      - ${SONARR_LIB_2}:/data-dsnine
+    ports:
+      - ${SONARR_1080P}:8989
+  sonarr-4k:
+    image: lscr.io/linuxserver/sonarr:develop
+    container_name: sonarr-4k
+    <<: *env
+    volumes:
+      - ${SONARR_LOC_4K}:/config
+      - ${SONARR_LIB_2}:/data-dsnine
+    ports:
+      - ${SONARR_4K}:8989
+  sonarr-anime:
+    image: lscr.io/linuxserver/sonarr:develop
+    container_name: sonarr-anime
+    <<: *env
+    volumes:
+      - ${SONARR_LOC_ANIME}:/config
+      - ${SONARR_LIB_1}:/data
+      - ${SONARR_LIB_2}:/data-dsnine
+    ports:
+      - ${SONARR_ANIME}:8989
